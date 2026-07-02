@@ -19,7 +19,15 @@ export const registerUser = async (userData) => {
     "password",
   ]);
   console.log("Step 2");
-  const existingUser = await User.findOne({ email });
+
+  try {
+    const existingUser = await User.findOne({ email });
+    console.log("FindOne OK", existingUser);
+  } catch (err) {
+    console.error("FindOne Error:", err);
+    throw err;
+  }
+
   console.log("Step 3");
   if (existingUser) {
     throw new ApiError(400, "Người dùng với email này đã tồn tại");

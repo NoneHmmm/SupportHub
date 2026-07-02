@@ -2,10 +2,15 @@ import mongoose from "mongoose";
 
 export const connectDB = async () => {
     try {
+        console.log("Connecting MongoDB...");
+
         await mongoose.connect(process.env.MONGO_URI);
-        console.log("Kết nối MongoDB thành công:", mongoose.connection.host);
-    } catch (error) {
-        console.error("Lỗi khi kết nối đến MongoDB:", error);
-        process.exit(1);
+
+        console.log("✅ Mongo Connected");
+        console.log("ReadyState:", mongoose.connection.readyState);
+        console.log("DB:", mongoose.connection.name);
+    } catch (err) {
+        console.error("❌ Mongo Error:", err);
+        throw err;
     }
 };

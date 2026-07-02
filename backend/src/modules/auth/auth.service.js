@@ -22,17 +22,18 @@ export const registerUser = async (userData) => {
 
   try {
     const existingUser = await User.findOne({ email });
+    console.log("Step 3");
+    if (existingUser) {
+      throw new ApiError(400, "Người dùng với email này đã tồn tại");
+    }
+    console.log("Step 4");
     console.log("FindOne OK", existingUser);
   } catch (err) {
     console.error("FindOne Error:", err);
     throw err;
   }
 
-  console.log("Step 3");
-  if (existingUser) {
-    throw new ApiError(400, "Người dùng với email này đã tồn tại");
-  }
-  console.log("Step 4");
+
   if (password.length < 8) {
     throw new ApiError(400, "Mật khẩu phải có ít nhất 8 ký tự");
   }

@@ -4,9 +4,13 @@ import bcrypt from "bcryptjs";
 import { validateInput } from "../../utils/missingInput.js";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
-import { sendForgotPasswordEmail, sendResetPasswordSuccessEmail } from "../../utils/nodemailer.js";
+import {
+  sendForgotPasswordEmail,
+  sendResetPasswordSuccessEmail,
+} from "../../utils/nodemailer.js";
 
 export const registerUser = async (userData) => {
+  console.log("Step 1");
   const { fullName, email, password } = userData;
 
   validateInput({ fullName, email, password }, [
@@ -14,19 +18,23 @@ export const registerUser = async (userData) => {
     "email",
     "password",
   ]);
-
+  console.log("Step 2");
   const existingUser = await User.findOne({ email });
+  console.log("Step 3");
   if (existingUser) {
     throw new ApiError(400, "Người dùng với email này đã tồn tại");
   }
-
+  console.log("Step 4");
   if (password.length < 8) {
     throw new ApiError(400, "Mật khẩu phải có ít nhất 8 ký tự");
   }
 
   const hashedPassword = await bcrypt.hash(password, 12);
+  console.log("Step 5");
   const user = new User({ ...userData, password: hashedPassword });
+  console.log("Step 6");
   await user.save();
+  console.log("Step 7");
   return user;
 };
 
@@ -80,9 +88,13 @@ export const refreshToken = async (refreshToken) => {
   if (session.expiresAt < Date.now()) {
     throw new ApiError(401, "Token đã hết hạn");
   }
-  const accessToken = jwt.sign({ userId: session.userId }, process.env.JWT_SECRET, {
-    expiresIn: process.env.ACCESS_TOKEN_TTL,
-  });
+  const accessToken = jwt.sign(
+    { userId: session.userId },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: process.env.ACCESS_TOKEN_TTL,
+    },
+  );
   return accessToken;
 };
 

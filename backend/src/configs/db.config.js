@@ -1,14 +1,18 @@
 import mongoose from "mongoose";
 
+// Prevent Mongoose from buffering queries when not connected
+mongoose.set('bufferCommands', false);
+
 export const connectDB = async () => {
     try {
         console.log("Connecting MongoDB...");
 
-        await mongoose.connect(process.env.MONGO_URI);
-
+        await mongoose.connect(process.env.MONGO_URI, {
+            serverSelectionTimeoutMS: 15000,
+            socketTimeoutMS: 45000,
+            connectTimeoutMS: 15000,
+        });
         console.log("✅ Mongo Connected");
-        console.log("ReadyState:", mongoose.connection.readyState);
-        console.log("DB:", mongoose.connection.name);
     } catch (err) {
         console.error("❌ Mongo Error:", err);
         throw err;

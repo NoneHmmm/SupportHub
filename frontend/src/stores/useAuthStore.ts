@@ -51,13 +51,15 @@ const useAuthStore = create<AuthState>((set) => ({
   },
   register: async (fullName: string, email: string, password: string) => {
     set({ isLoading: true });
-    const response = await AuthService.registerUser(fullName, email, password);
-    set({
-      user: response.data.user,
-      token: response.data.token,
-      isAuthenticated: true,
-      isLoading: false,
-    });
+    try {
+      const response = await AuthService.registerUser(fullName, email, password);
+      toast.success(response.message || "Đăng ký thành công! Vui lòng đăng nhập");
+    } catch (error) {
+      toast.error("Đăng ký thất bại");
+      throw error;
+    } finally {
+      set({ isLoading: false });
+    }
   },
   forgotPassword: async (email: string) => {
     set({ isLoading: true, error: null });

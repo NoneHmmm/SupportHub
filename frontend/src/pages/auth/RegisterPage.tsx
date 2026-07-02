@@ -51,7 +51,7 @@ const RegisterPage = () => {
     if (!validate()) return;
     try {
       await register(fullName, email, password);
-      navigate("/");
+      navigate("/login");
     } catch {
       // error is handled by AuthService toast
     }

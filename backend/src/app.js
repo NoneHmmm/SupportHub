@@ -9,8 +9,9 @@ import { notFound } from "./middlewares/errorHandler.middleware.js";
 import { errorHandler } from "./middlewares/errorHandler.middleware.js";
 
 const app = express();
+app.set("trust proxy", 1);
 
-app.use(cors( {
+app.use(cors({
     origin: process.env.CLIENT_URL,
     credentials: true,
 }));
@@ -21,8 +22,7 @@ app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
 app.use(helmet());
 app.use(morgan("dev"));
-
-app.use("/api",authLimiter, routes);
+app.use("/api", authLimiter, routes);
 
 app.use(notFound);
 app.use(errorHandler);

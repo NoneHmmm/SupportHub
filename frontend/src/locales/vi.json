@@ -1,0 +1,195 @@
+{
+  "common": {
+    "brand": "SupportHub",
+    "log_in": "Đăng nhập",
+    "get_started": "Bắt đầu",
+    "get_started_free": "Dùng thử miễn phí",
+    "watch_demo": "Xem bản demo",
+    "ticket_routing": "Tự động phân loại ticket",
+    "response_time": "Thời gian phản hồi < 5 phút",
+    "resolved_count": "Đã giải quyết 1M+ yêu cầu",
+    "features": "Tính năng",
+    "how_it_works": "Cách hoạt động",
+    "faq": "FAQ",
+    "stats": "Thống kê",
+    "log_out": "Đăng xuất",
+    "dashboard": "Bảng điều khiển",
+    "edit": "Chỉnh sửa",
+    "send_reply": "Gửi phản hồi",
+    "create_ticket": "Gửi yêu cầu hỗ trợ"
+  },
+  "hero": {
+    "eyebrow": "Hỗ trợ khách hàng 24/7",
+    "title_line1": "Nền tảng hỗ trợ khách hàng",
+    "title_highlight": "tinh gọn & hiệu quả",
+    "subtitle": "Tiếp nhận, quản lý và phản hồi mọi yêu cầu hỗ trợ từ khách hàng một cách tập trung. Giúp đội ngũ của bạn xử lý ticket nhanh chóng, chuyên nghiệp và không bỏ sót bất kỳ thông tin nào.",
+    "ticket_title": "Không thể truy cập tài khoản",
+    "ticket_body": "Chào bạn, tôi đã cố gắng đăng nhập suốt một giờ qua nhưng vẫn nhận được thông báo lỗi...",
+    "ticket_messages": "3 tin nhắn",
+    "ticket_time": "25 phút trước",
+    "ai_suggested": "Phản hồi gợi ý bởi AI",
+    "ai_reply": "\"Chào Alice, thật tiếc vì sự cố này! Hãy thử đặt lại mật khẩu bằng liên kết 'Quên mật khẩu' trên trang đăng nhập nhé.\"",
+    "confidence": "Độ tin cậy: 94%",
+    "premium_plan": "Gói Premium",
+    "open_status": "Đang mở"
+  },
+  "footer": {
+    "copyright": "© {{year}} SupportHub. Đã đăng ký bản quyền."
+  },
+  "language": {
+    "en": "English",
+    "vi": "Tiếng Việt"
+  },
+  "faq": {
+    "title": "Câu hỏi thường gặp",
+    "subtitle": "Mọi điều bạn cần biết về SupportHub — từ thiết lập đến các tính năng nâng cao.",
+    "faq_1": {
+      "q": "SupportHub tích hợp với các công cụ hiện tại của tôi như thế nào?",
+      "a": "SupportHub kết nối với các công cụ phổ biến như Slack, Gmail, Zendesk và nhiều ứng dụng khác qua API. Bạn có thể thiết lập tích hợp trong vài phút từ bảng điều khiển mà không cần viết code."
+    },
+    "faq_2": {
+      "q": "Tôi có thể tùy chỉnh trạng thái ticket và quy trình làm việc không?",
+      "a": "Có. Bạn có thể tạo trạng thái ticket, mức độ ưu tiên và quy tắc tự động hóa tùy chỉnh phù hợp với quy trình của đội ngũ. Công cụ kéo-thả giúp bạn dễ dàng thiết kế quy trình lý tưởng."
+    },
+    "faq_3": {
+      "q": "Có giới hạn số lượng ticket mà đội ngũ tôi có thể xử lý không?",
+      "a": "Không. Nền tảng của chúng tôi được thiết kế để mở rộng theo đội ngũ của bạn. Dù bạn xử lý 100 hay 100.000 ticket mỗi tháng, SupportHub vẫn vận hành mượt mà không suy giảm hiệu suất."
+    },
+    "faq_4": {
+      "q": "Tính năng phản hồi gợi ý bởi AI hoạt động như thế nào?",
+      "a": "AI của chúng tôi phân tích các hội thoại trước đây, bài viết trong cơ sở kiến thức và ngữ cảnh ticket hiện tại để soạn câu trả lời gợi ý. Nhân viên có thể xem lại, chỉnh sửa và gửi chỉ với một cú nhấp chuột — tiết kiệm hàng giờ mỗi ngày."
+    },
+    "faq_5": {
+      "q": "Khách hàng của tôi có thể theo dõi trạng thái ticket không?",
+      "a": "Chắc chắn rồi. Bạn có thể kích hoạt cổng thông tin khách hàng, nơi người dùng có thể xem, bình luận và theo dõi ticket của họ theo thời gian thực. Điều này giảm lượng câu hỏi đến và giữ cho khách hàng luôn được cập nhật."
+    },
+    "faq_6": {
+      "q": "Bạn cung cấp hỗ trợ và đào tạo như thế nào?",
+      "a": "Chúng tôi cung cấp hỗ trợ qua email và chat 24/7 cho tất cả các gói. Khách hàng doanh nghiệp được cấp quản lý tài khoản riêng, buổi đào tạo khởi đầu và hỗ trợ ưu tiên. Cơ sở kiến thức và video hướng dẫn của chúng tôi luôn sẵn sàng 24/7."
+    }
+  },
+  "how_it_works": {
+    "title": "Cách hoạt động",
+    "subtitle": "Từ gửi yêu cầu đến khi hoàn tất — quy trình liền mạch cho đội ngũ hỗ trợ của bạn.",
+    "submit": {
+      "title": "Gửi yêu cầu",
+      "desc": "Khách hàng gửi yêu cầu qua kênh mong muốn — form web, email hoặc trong ứng dụng."
+    },
+    "assign": {
+      "title": "Phân công tự động",
+      "desc": "Hệ thống tự động chuyển ticket đến đúng nhân viên dựa trên nội dung và mức độ khẩn cấp."
+    },
+    "respond": {
+      "title": "Phản hồi & Cộng tác",
+      "desc": "Nhân viên phản hồi trực tiếp hoặc cộng tác nội bộ để đưa ra giải pháp tốt nhất với gợi ý từ AI."
+    },
+    "resolve": {
+      "title": "Giải quyết & Đóng",
+      "desc": "Sau khi vấn đề được xử lý, ticket được đóng và khách hàng được mời đánh giá trải nghiệm."
+    }
+  },
+  "features": {
+    "title": "Mọi thứ bạn cần để xử lý yêu cầu hỗ trợ",
+    "subtitle": "Công cụ được thiết kế dành riêng cho đội ngũ hỗ trợ — từ tiếp nhận đến xử lý xong, tất cả trong một nơi.",
+    "ticket_management": {
+      "title": "Quản lý Ticket",
+      "desc": "Tạo, phân công và theo dõi ticket hỗ trợ từ một bảng điều khiển duy nhất. Không bao giờ bỏ sót yêu cầu nào."
+    },
+    "smart_routing": {
+      "title": "Phân loại thông minh",
+      "desc": "Tự động gán ticket đến đúng nhân viên dựa trên kỹ năng, khối lượng công việc và mức độ ưu tiên."
+    },
+    "real_time_collab": {
+      "title": "Cộng tác thời gian thực",
+      "desc": "Nhân viên có thể thảo luận nội bộ về từng ticket, chia sẻ ghi chú và giải quyết nhanh hơn theo nhóm."
+    },
+    "analytics": {
+      "title": "Phân tích & Báo cáo",
+      "desc": "Theo dõi thời gian phản hồi, tỷ lệ xử lý và hiệu suất đội ngũ qua các báo cáo chi tiết."
+    },
+    "notifications": {
+      "title": "Thông báo tức thì",
+      "desc": "Nhận thông báo ngay qua email hoặc trong ứng dụng khi có ticket mới hoặc trạng thái thay đổi."
+    },
+    "security": {
+      "title": "Bảo mật doanh nghiệp",
+      "desc": "Kiểm soát truy cập theo vai trò, dữ liệu được mã hóa và nhật ký kiểm toán giúp dữ liệu khách hàng luôn an toàn."
+    }
+  },
+  "rating": {
+    "title": "Được yêu thích bởi đội ngũ hỗ trợ",
+    "subtitle": "Lắng nghe từ những người dẫn đầu bộ phận hỗ trợ khách hàng đang sử dụng SupportHub mỗi ngày.",
+    "testimonial_1": "Chuyển sang SupportHub giúp chúng tôi giảm một nửa thời gian phản hồi. Tính năng phân loại thông minh thực sự thay đổi cuộc chơi cho một đội ngũ quy mô như chúng tôi.",
+    "testimonial_1_name": "Alice Kim",
+    "testimonial_1_role": "Trưởng nhóm Hỗ trợ KH, TechFlow",
+    "testimonial_2": "Chúng tôi đã thoát khỏi mớ email hỗn loạn và chuyển sang một nền tảng duy nhất. Điểm CSAT của chúng tôi tăng từ 82% lên 96% chỉ trong ba tháng.",
+    "testimonial_2_name": "Marcus Tan",
+    "testimonial_2_role": "Giám đốc Hỗ trợ, Nimbus SaaS",
+    "testimonial_3": "Tính năng phản hồi gợi ý bởi AI giúp đội ngũ của chúng tôi tiết kiệm hàng giờ mỗi tuần. Như có thêm một thành viên không bao giờ ngủ vậy.",
+    "testimonial_3_name": "Sofia Larsen",
+    "testimonial_3_role": "Giám đốc Vận hành, BrightCare"
+  },
+  "stats": {
+    "title": "Thành tựu của chúng tôi",
+    "subtitle": "Mỗi con số phản ánh cam kết giúp đội ngũ hỗ trợ xử lý yêu cầu nhanh hơn và tốt hơn.",
+    "tickets_resolved": "Ticket đã xử lý",
+    "avg_response": "Thời gian phản hồi trung bình",
+    "satisfaction": "Mức độ hài lòng",
+    "active_agents": "Nhân viên hỗ trợ"
+  },
+  "auth": {
+    "left_title_login": "Chào mừng trở lại SupportHub",
+    "left_title_register": "Bắt đầu tối ưu hỗ trợ khách hàng",
+    "left_subtitle": "Nền tảng giúp đội ngũ hỗ trợ xử lý ticket nhanh hơn và mang lại trải nghiệm khách hàng xuất sắc.",
+    "login_title": "Đăng nhập tài khoản",
+    "login_subtitle": "Nhập thông tin để truy cập bảng điều khiển.",
+    "register_title": "Tạo tài khoản",
+    "register_subtitle": "Dùng thử miễn phí — không cần thẻ tín dụng.",
+    "forgot_password_title": "Quên mật khẩu?",
+    "forgot_password_subtitle": "Đừng lo. Nhập email của bạn và chúng tôi sẽ gửi liên kết đặt lại mật khẩu.",
+    "forgot_password_success_title": "Kiểm tra email của bạn",
+    "forgot_password_success_subtitle": "Chúng tôi đã gửi liên kết đặt lại mật khẩu đến",
+    "forgot_password_hint_spam": "Không nhận được email? Hãy kiểm tra thư mục spam hoặc đảm bảo bạn đã nhập đúng địa chỉ email.",
+    "forgot_password_hint_resend": "Liên kết đặt lại mật khẩu có hiệu lực trong 15 phút. Nếu bạn cần liên kết mới, chỉ cần yêu cầu lại.",
+    "forgot_password_back_to_login": "Quay lại đăng nhập",
+    "forgot_password_submit": "Gửi liên kết đặt lại",
+    "forgot_password_error": "Không tìm thấy tài khoản với email này. Vui lòng kiểm tra và thử lại.",
+    "reset_password_title": "Đặt mật khẩu mới",
+    "reset_password_subtitle": "Nhập mật khẩu mới bên dưới để truy cập lại tài khoản của bạn.",
+    "reset_password_success_title": "Đặt lại mật khẩu thành công!",
+    "reset_password_success_subtitle": "Mật khẩu của bạn đã được cập nhật. Bạn có thể đăng nhập bằng mật khẩu mới.",
+    "reset_password_expired": "Liên kết đặt lại mật khẩu không hợp lệ hoặc đã hết hạn.",
+    "reset_password_expired_hint": "Vui lòng yêu cầu liên kết đặt lại mật khẩu mới từ trang đăng nhập.",
+    "reset_password_submit": "Đặt lại mật khẩu",
+    "reset_password_to_login": "Đi đến đăng nhập",
+    "reset_password_success_toast": "Đặt lại mật khẩu thành công!",
+    "email_label": "Email",
+    "email_placeholder": "you@company.com",
+    "password_label": "Mật khẩu",
+    "password_placeholder": "Nhập mật khẩu",
+    "confirm_password_label": "Xác nhận mật khẩu",
+    "confirm_password_placeholder": "Nhập lại mật khẩu",
+    "name_label": "Họ và tên",
+    "name_placeholder": "Nguyễn Văn A",
+    "remember_me": "Ghi nhớ đăng nhập",
+    "forgot_password": "Quên mật khẩu?",
+    "no_account": "Chưa có tài khoản?",
+    "has_account": "Đã có tài khoản?",
+    "sign_up_link": "Đăng ký",
+    "sign_in_link": "Đăng nhập",
+    "submit_login": "Đăng nhập",
+    "submit_register": "Tạo tài khoản",
+    "or_continue_with": "hoặc tiếp tục với",
+    "login_success": "Đăng nhập thành công!",
+    "register_success": "Tạo tài khoản thành công!",
+    "error_required": "Trường này bắt buộc",
+    "error_invalid_email": "Vui lòng nhập email hợp lệ",
+    "error_password_min": "Mật khẩu phải có ít nhất 8 ký tự",
+    "error_password_mismatch": "Mật khẩu không khớp"
+  },
+  "theme": {
+    "light": "Sáng",
+    "dark": "Tối",
+    "system": "Hệ thống"
+  }
+}

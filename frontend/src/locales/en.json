@@ -1,0 +1,196 @@
+{
+  "common": {
+    "brand": "SupportHub",
+    "log_in": "Log in",
+    "get_started": "Get Started",
+    "get_started_free": "Get Started Free",
+    "watch_demo": "Watch Demo",
+    "ticket_routing": "Automated ticket routing",
+    "response_time": "< 5 min response time",
+    "resolved_count": "1M+ requests resolved",
+    "features": "Features",
+    "how_it_works": "How It Works",
+    "faq": "FAQ",
+    "stats": "Stats",
+    "dashboard": "Dashboard",
+    "log_out": "Log out",
+    "edit": "Edit",
+    "send_reply": "Send Reply",
+    "create_ticket": "Submit a Ticket"
+  },
+  "hero": {
+    "eyebrow": "24/7 Customer Support",
+    "title_line1": "The ultimate customer support platform",
+    "title_highlight": "streamlined & efficient",
+    "subtitle": "Collect, manage, and respond to all customer support requests in one centralized place. Help your team resolve tickets faster, more professionally, and never miss a beat.",
+    "ticket_title": "Can't access my account",
+    "ticket_body": "Hi, I've been trying to log in for the past hour but keep getting an error message...",
+    "ticket_messages": "3 messages",
+    "ticket_time": "25m ago",
+    "ai_suggested": "AI Suggested Reply",
+    "ai_reply": "\"Hi Alice, sorry for the trouble! Let me help you get back in. Could you try resetting your password using the 'Forgot Password' link on the login page?\"",
+    "confidence": "Confidence: 94%",
+    "premium_plan": "Premium Plan",
+    "open_status": "Open"
+  },
+  "footer": {
+    "copyright": "© {{year}} SupportHub. All rights reserved."
+  },
+  "language": {
+    "en": "English",
+    "vi": "Tiếng Việt"
+  },
+  "faq": {
+    "title": "Frequently asked questions",
+    "subtitle": "Everything you need to know about SupportHub — from setup to advanced features.",
+    "faq_1": {
+      "q": "How does SupportHub integrate with my existing tools?",
+      "a": "SupportHub connects with popular tools like Slack, Gmail, Zendesk, and many more via our API. You can set up integrations in minutes from the dashboard without any coding."
+    },
+    "faq_2": {
+      "q": "Can I customize ticket statuses and workflows?",
+      "a": "Yes. You can create custom ticket statuses, priority levels, and automation rules tailored to your team's workflow. Our drag-and-drop builder makes it easy to design your ideal process."
+    },
+    "faq_3": {
+      "q": "Is there a limit on how many tickets my team can handle?",
+      "a": "No. Our platform is designed to scale with your team. Whether you handle 100 or 100,000 tickets a month, SupportHub handles it without performance degradation."
+    },
+    "faq_4": {
+      "q": "How does the AI-assisted reply work?",
+      "a": "Our AI analyzes past conversations, knowledge base articles, and the current ticket context to draft suggested replies. Agents can review, edit, and send with one click — saving hours every day."
+    },
+    "faq_5": {
+      "q": "Can my customers track their ticket status?",
+      "a": "Absolutely. You can enable a customer portal where users can view, comment on, and track their tickets in real time. It reduces inbound inquiries and keeps customers informed."
+    },
+    "faq_6": {
+      "q": "What kind of support and training do you offer?",
+      "a": "We offer 24/7 email and chat support for all plans. Enterprise customers get a dedicated account manager, onboarding session, and priority support. Our knowledge base and video tutorials are available around the clock."
+    }
+  },
+  "how_it_works": {
+    "title": "How it works",
+    "subtitle": "From submission to resolution — a seamless workflow for your support team.",
+    "submit": {
+      "title": "Submit a Ticket",
+      "desc": "Customers submit requests through your preferred channel — web form, email, or in-app."
+    },
+    "assign": {
+      "title": "Auto Assignment",
+      "desc": "Our system intelligently routes each ticket to the most qualified agent based on skill, workload, and urgency."
+    },
+    "respond": {
+      "title": "Respond & Collaborate",
+      "desc": "Agents reply directly or collaborate internally to craft the best solution with AI-assisted suggestions."
+    },
+    "resolve": {
+      "title": "Resolve & Close",
+      "desc": "Once the issue is resolved, the ticket is closed and the customer is invited to rate their experience."
+    }
+  },
+  "features": {
+    "title": "Everything you need to handle support",
+    "subtitle": "Tools designed for support teams — from ticket intake to resolution, all in one place.",
+    "ticket_management": {
+      "title": "Ticket Management",
+      "desc": "Create, assign, and track support tickets from a single dashboard. Never lose a customer request again."
+    },
+    "smart_routing": {
+      "title": "Smart Routing",
+      "desc": "Automatically assign tickets to the right agent based on skill, workload, and priority level."
+    },
+    "real_time_collab": {
+      "title": "Real-time Collaboration",
+      "desc": "Agents can discuss tickets internally, share notes, and resolve issues faster as a team."
+    },
+    "analytics": {
+      "title": "Analytics & Insights",
+      "desc": "Monitor response times, resolution rates, and team performance with detailed reports."
+    },
+    "notifications": {
+      "title": "Instant Notifications",
+      "desc": "Get alerted instantly via email or in-app when a new ticket arrives or a status changes."
+    },
+    "security": {
+      "title": "Enterprise Security",
+      "desc": "Role-based access control, encrypted data, and audit logs to keep customer data safe."
+    }
+  },
+  "rating": {
+    "title": "Loved by support teams",
+    "subtitle": "Hear from customer support leaders who use SupportHub to deliver exceptional service every day.",
+    "testimonial_1": "Switching to SupportHub cut our average response time in half. The smart routing is a game-changer for a team our size.",
+    "testimonial_1_name": "Alice Kim",
+    "testimonial_1_role": "Customer Support Lead, TechFlow",
+    "testimonial_2": "We went from scattered emails to a single platform. Our CSAT score jumped from 82% to 96% in just three months.",
+    "testimonial_2_name": "Marcus Tan",
+    "testimonial_2_role": "Head of Support, Nimbus SaaS",
+    "testimonial_3": "The AI-assisted replies save our agents hours every week. It's like having an extra team member who never sleeps.",
+    "testimonial_3_name": "Sofia Larsen",
+    "testimonial_3_role": "Operations Director, BrightCare",
+    "CSAT": "Customer satisfaction"
+  },
+  "stats": {
+    "title": "Our Impact in Numbers",
+    "subtitle": "Every metric reflects our commitment to helping support teams deliver faster, better service.",
+    "tickets_resolved": "Tickets resolved",
+    "avg_response": "Average response time",
+    "satisfaction": "Customer satisfaction",
+    "active_agents": "Active support agents"
+  },
+  "auth": {
+    "left_title_login": "Welcome back to SupportHub",
+    "left_title_register": "Start streamlining your support",
+    "left_subtitle": "The platform that helps support teams resolve tickets faster and deliver exceptional customer experiences.",
+    "login_title": "Log in to your account",
+    "login_subtitle": "Enter your credentials to access your dashboard.",
+    "register_title": "Create your account",
+    "register_subtitle": "Start your free trial — no credit card required.",
+    "forgot_password_title": "Forgot your password?",
+    "forgot_password_subtitle": "No worries. Enter your email and we'll send you a reset link.",
+    "forgot_password_success_title": "Check your email",
+    "forgot_password_success_subtitle": "We've sent a password reset link to",
+    "forgot_password_hint_spam": "Didn't receive the email? Check your spam folder or make sure you entered the correct email address.",
+    "forgot_password_hint_resend": "The reset link expires in 15 minutes. If you need a new one, simply request again.",
+    "forgot_password_back_to_login": "Back to login",
+    "forgot_password_submit": "Send reset link",
+    "forgot_password_error": "No account found with this email. Please check and try again.",
+    "reset_password_title": "Set a new password",
+    "reset_password_subtitle": "Enter your new password below to regain access to your account.",
+    "reset_password_success_title": "Password reset successful!",
+    "reset_password_success_subtitle": "Your password has been updated. You can now log in with your new password.",
+    "reset_password_expired": "This reset link is invalid or has expired.",
+    "reset_password_expired_hint": "Please request a new password reset link from the login page.",
+    "reset_password_submit": "Reset password",
+    "reset_password_to_login": "Go to login",
+    "reset_password_success_toast": "Password has been reset successfully!",
+    "email_label": "Email",
+    "email_placeholder": "you@company.com",
+    "password_label": "Password",
+    "password_placeholder": "Enter your password",
+    "confirm_password_label": "Confirm password",
+    "confirm_password_placeholder": "Re-enter your password",
+    "name_label": "Full name",
+    "name_placeholder": "John Doe",
+    "remember_me": "Remember me",
+    "forgot_password": "Forgot password?",
+    "no_account": "Don't have an account?",
+    "has_account": "Already have an account?",
+    "sign_up_link": "Sign up",
+    "sign_in_link": "Log in",
+    "submit_login": "Log in",
+    "submit_register": "Create account",
+    "or_continue_with": "or continue with",
+    "login_success": "Logged in successfully!",
+    "register_success": "Account created successfully!",
+    "error_required": "This field is required",
+    "error_invalid_email": "Please enter a valid email",
+    "error_password_min": "Password must be at least 8 characters",
+    "error_password_mismatch": "Passwords do not match"
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  }
+}

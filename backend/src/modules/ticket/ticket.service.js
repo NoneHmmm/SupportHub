@@ -1,7 +1,7 @@
-import { Ticket, TicketMessage, Attachment } from "../../models/index.js";
+import { Ticket, TicketMessage, Attachment, ActivityLog, User } from "../../models/index.js";
 import { ApiError } from "../../utils/apiError.js";
 import { validateInput } from "../../utils/missingInput.js";
-import { TICKET_STATUS } from "../../constants/index.js";
+import { TICKET_STATUS, TICKET_PRIORITY } from "../../constants/index.js";
 import mongoose from "mongoose";
 
 const buildTicketNumber = async () => {
@@ -161,5 +161,180 @@ export const rateTicket = async (ticketId, userId, rating) => {
 
   ticket.rating = numericRating;
   await ticket.save();
+  return ticket;
+};
+
+// ────────────── Admin / Leader APIs ──────────────
+
+/** Helper: tìm ticket không check quyền sở hữu */
+const findTicket = async (ticketId) => {
+  ensureValidId(ticketId, "ticket id");
+  const ticket = await Ticket.findById(ticketId);
+  if (!ticket) {
+    throw new ApiError(404, "Ticket không tồn tại");
+  }
+  return ticket;
+};
+
+/** Helper: ghi activity log */
+const logActivity = async (ticketId, userId, action, oldValue, newValue) => {
+  const activity = new ActivityLog({ ticketId, userId, action, oldValue, newValue });
+  await activity.save();
+};
+
+/** 1. GET /api/tickets — danh sách tất cả tickets (có filter, search, phân trang) */
+export const getAllTickets = async (query = {}) => {
+  const page = Math.max(parseInt(query.page, 10) || 1, 1);
+  const limit = Math.min(parseInt(query.limit, 10) || 10, 100);
+  const skip = (page - 1) * limit;
+
+  const filter = {};
+  if (query.status) filter.status = query.status;
+  if (query.type) filter.type = query.type;
+  if (query.priority) filter.priority = query.priority;
+  if (query.assignedTo) filter.assignedTo = query.assignedTo;
+
+  if (query.search) {
+    filter.$or = [
+      { ticketNumber: { $regex: query.search, $options: "i" } },
+      { title: { $regex: query.search, $options: "i" } },
+    ];
+  }
+
+  const sortField = query.sortBy || "createdAt";
+  const sortOrder = query.sortOrder === "asc" ? 1 : -1;
+
+  const [items, total] = await Promise.all([
+    Ticket.find(filter)
+      .populate("senderId", "fullName email")
+      .populate("assignedTo", "fullName email")
+      .sort({ [sortField]: sortOrder })
+      .skip(skip)
+      .limit(limit),
+    Ticket.countDocuments(filter),
+  ]);
+
+  return {
+    items,
+    pagination: { page, limit, total, totalPages: Math.ceil(total / limit) || 1 },
+  };
+};
+
+/** 2. PATCH /api/tickets/:id/assign — phân công ticket cho agent */
+export const assignTicket = async (ticketId, userId, assignedTo) => {
+  validateInput({ assignedTo }, ["assignedTo"]);
+
+  if (!mongoose.Types.ObjectId.isValid(assignedTo)) {
+    throw new ApiError(400, "Định dạng ID người dùng không hợp lệ");
+  }
+
+  const assignee = await User.findById(assignedTo);
+  if (!assignee) {
+    throw new ApiError(404, "Người dùng được chỉ định không tồn tại");
+  }
+
+  const ticket = await findTicket(ticketId);
+  const oldAssignee = ticket.assignedTo ? ticket.assignedTo.toString() : "unassigned";
+
+  ticket.assignedTo = assignedTo;
+  if (ticket.status === TICKET_STATUS.PENDING) {
+    ticket.status = TICKET_STATUS.IN_PROGRESS;
+  }
+  await ticket.save();
+
+  await logActivity(ticketId, userId, "assign", oldAssignee, assignedTo);
+
+  return ticket;
+};
+
+/** 3. PATCH /api/tickets/:id/priority — cập nhật mức độ ưu tiên */
+export const updatePriority = async (ticketId, userId, priority) => {
+  if (!Object.values(TICKET_PRIORITY).includes(priority)) {
+    throw new ApiError(
+      400,
+      `Priority không hợp lệ. Chấp nhận: ${Object.values(TICKET_PRIORITY).join(", ")}`,
+    );
+  }
+
+  const ticket = await findTicket(ticketId);
+  const oldPriority = ticket.priority || "none";
+
+  ticket.priority = priority;
+  await ticket.save();
+
+  await logActivity(ticketId, userId, "priority", oldPriority, priority);
+
+  return ticket;
+};
+
+/** 4. PATCH /api/tickets/:id/status — cập nhật trạng thái */
+export const updateStatus = async (ticketId, userId, status) => {
+  if (!Object.values(TICKET_STATUS).includes(status)) {
+    throw new ApiError(
+      400,
+      `Status không hợp lệ. Chấp nhận: ${Object.values(TICKET_STATUS).join(", ")}`,
+    );
+  }
+
+  const ticket = await findTicket(ticketId);
+  const oldStatus = ticket.status;
+
+  ticket.status = status;
+  if (status === TICKET_STATUS.RESOLVED) {
+    ticket.resolvedAt = new Date();
+  }
+  if (status === TICKET_STATUS.CLOSED) {
+    ticket.closedAt = new Date();
+  }
+  await ticket.save();
+
+  await logActivity(ticketId, userId, "status", oldStatus, status);
+
+  return ticket;
+};
+
+/** 5. PATCH /api/tickets/:id/transfer — chuyển ticket cho agent khác */
+export const transferTicket = async (ticketId, userId, assignedTo) => {
+  validateInput({ assignedTo }, ["assignedTo"]);
+
+  if (!mongoose.Types.ObjectId.isValid(assignedTo)) {
+    throw new ApiError(400, "Định dạng ID người dùng không hợp lệ");
+  }
+
+  const assignee = await User.findById(assignedTo);
+  if (!assignee) {
+    throw new ApiError(404, "Người dùng được chuyển đến không tồn tại");
+  }
+
+  const ticket = await findTicket(ticketId);
+  const oldAssignee = ticket.assignedTo ? ticket.assignedTo.toString() : "unassigned";
+
+  ticket.assignedTo = assignedTo;
+  if (ticket.status === TICKET_STATUS.PENDING) {
+    ticket.status = TICKET_STATUS.IN_PROGRESS;
+  }
+  await ticket.save();
+
+  await logActivity(ticketId, userId, "transfer", oldAssignee, assignedTo);
+
+  return ticket;
+};
+
+/** 6. PATCH /api/tickets/:id/reopen — mở lại ticket đã đóng */
+export const reopenTicket = async (ticketId, userId) => {
+  const ticket = await findTicket(ticketId);
+
+  if (ticket.status !== TICKET_STATUS.CLOSED && ticket.status !== TICKET_STATUS.RESOLVED) {
+    throw new ApiError(400, "Chỉ có thể mở lại ticket đã đóng hoặc đã giải quyết");
+  }
+
+  const oldStatus = ticket.status;
+  ticket.status = TICKET_STATUS.IN_PROGRESS;
+  ticket.closedAt = null;
+  ticket.resolvedAt = null;
+  await ticket.save();
+
+  await logActivity(ticketId, userId, "reopen", oldStatus, TICKET_STATUS.IN_PROGRESS);
+
   return ticket;
 };

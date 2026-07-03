@@ -2,6 +2,7 @@ import { create } from "zustand";
 import type { User } from "../types/User";
 import * as AuthService from "../services/AuthService";
 import { toast } from "sonner";
+import axios from "axios";
 
 interface AuthState {
   user: User | null;
@@ -39,7 +40,11 @@ const useAuthStore = create<AuthState>((set) => ({
       });
       toast.success("Đăng nhập thành công");
     } catch (error) {
-      toast.error("Đăng nhập thất bại");
+      if (axios.isAxiosError(error)) {
+        toast.error(error.response?.data?.message || "Đăng ký thất bại");
+      } else {
+        toast.error("Đã xảy ra lỗi không xác định");
+      }
       throw error;
     } finally {
       set({ isLoading: false });
@@ -52,10 +57,20 @@ const useAuthStore = create<AuthState>((set) => ({
   register: async (fullName: string, email: string, password: string) => {
     set({ isLoading: true });
     try {
-      const response = await AuthService.registerUser(fullName, email, password);
-      toast.success(response.message || "Đăng ký thành công! Vui lòng đăng nhập");
+      const response = await AuthService.registerUser(
+        fullName,
+        email,
+        password,
+      );
+      toast.success(
+        response.message || "Đăng ký thành công! Vui lòng đăng nhập",
+      );
     } catch (error) {
-      toast.error("Đăng ký thất bại");
+      if (axios.isAxiosError(error)) {
+        toast.error(error.response?.data?.message || "Đăng ký thất bại");
+      } else {
+        toast.error("Đã xảy ra lỗi không xác định");
+      }
       throw error;
     } finally {
       set({ isLoading: false });
@@ -67,7 +82,11 @@ const useAuthStore = create<AuthState>((set) => ({
       await AuthService.forgotPassword(email);
       toast.success("Email đặt lại mật khẩu đã được gửi");
     } catch (error) {
-      toast.error("Gửi email thất bại");
+      if (axios.isAxiosError(error)) {
+        toast.error(error.response?.data?.message || "Gửi email thất bại");
+      } else {
+        toast.error("Đã xảy ra lỗi không xác định");
+      }
       throw error;
     } finally {
       set({ isLoading: false });
@@ -79,7 +98,13 @@ const useAuthStore = create<AuthState>((set) => ({
       await AuthService.resetPassword(token, newPassword);
       toast.success("Mật khẩu đã được đặt lại thành công");
     } catch (error) {
-      toast.error("Đặt lại mật khẩu thất bại");
+      if (axios.isAxiosError(error)) {
+        toast.error(
+          error.response?.data?.message || "Đặt lại mật khẩu thất bại",
+        );
+      } else {
+        toast.error("Đã xảy ra lỗi không xác định");
+      }
       throw error;
     } finally {
       set({ isLoading: false });

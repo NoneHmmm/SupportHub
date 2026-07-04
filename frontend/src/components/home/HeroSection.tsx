@@ -33,7 +33,7 @@ const HeroSection = () => {
         </div>
 
         {/* ── Main heading with notion-style marker highlight ── */}
-        <h1 className="text-center text-4xl font-bold leading-20 tracking-tight text-notion-accent sm:text-5xl lg:text-6xl">
+        <h1 className="text-center text-4xl font-bold leading-10 md:leading-15 lg:leading-20 tracking-tight text-notion-accent sm:text-5xl lg:text-6xl">
           {t("hero.title_line1")}
           <br />
           <span className="marker-yellow px-1 text-notion-text">

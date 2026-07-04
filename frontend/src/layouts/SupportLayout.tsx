@@ -354,7 +354,7 @@ const SupportLayout = () => {
           </div>
 
           <div className="flex items-center gap-2 ml-auto">
-            <ThemeToggle variant="toggle" />
+            <ThemeToggle variant="dropdown" />
 
             {/* Language switcher */}
             <LanguageSwitcher />

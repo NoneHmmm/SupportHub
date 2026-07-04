@@ -104,6 +104,7 @@ export const forgotPassword = async (email) => {
 
   const resetToken = crypto.randomBytes(64).toString("hex");
   const resetTokenExpiresAt = Date.now() + 15 * 60 * 1000;
+  const resetLink = `${process.env.CLIENT_URL}/reset-password/${resetToken}`;
 
   const passwordResetToken = new PasswordResetToken({
     userId: user._id,

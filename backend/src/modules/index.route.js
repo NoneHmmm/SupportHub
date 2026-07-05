@@ -3,6 +3,8 @@ import authRoutes from "./auth/auth.route.js";
 import userRoutes from "./user/user.route.js";
 import ticketRoutes from "./ticket/ticket.route.js";
 import dashboardRoutes from "./dashboard/dashboard.route.js";
+import activityLogRoutes from "./activityLog/activityLog.route.js";
+import notificationRoutes from "./notification/notification.route.js";
 
 const router = Router();
 
@@ -10,5 +12,7 @@ router.use("/auth", authRoutes);
 router.use("/user", userRoutes);
 router.use("/tickets", ticketRoutes);
 router.use("/dashboard", dashboardRoutes);
+router.use("/logs", activityLogRoutes);
+router.use("/notifications", notificationRoutes);
 
 export default router;

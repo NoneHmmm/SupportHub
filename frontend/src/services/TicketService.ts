@@ -38,7 +38,7 @@ export const createTicket = async (
   if (images) {
     images.forEach((image) => formData.append("images", image));
   }
-  const response = await api.post<SingleResponse<Ticket>>("/tickets", formData);
+  const response = await api.post<SingleResponse<CreateTicketResponse>>("/tickets", formData);
   return response.data;
 };
 

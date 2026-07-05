@@ -4,6 +4,7 @@ import type {
   TicketMessage,
   TicketDetail,
   CreateTicketPayload,
+  CreateTicketResponse,
   TicketFilters,
   Pagination,
 } from "../types/Ticket";

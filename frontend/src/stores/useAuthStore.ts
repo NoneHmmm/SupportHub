@@ -119,7 +119,20 @@ const useAuthStore = create<AuthState>((set) => ({
     }
   },
   getUser: async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      set({ user: null, token: null, isAuthenticated: false });
+      return;
+    }
     set({ isLoading: true });
+    try {
+      const response = await AuthService.getProfile();
+      const user = response.data;
+      set({ user, isAuthenticated: true, isLoading: false });
+    } catch {
+      localStorage.removeItem("token");
+      set({ user: null, token: null, isAuthenticated: false, isLoading: false });
+    }
   },
 }));
 

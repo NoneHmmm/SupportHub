@@ -60,7 +60,8 @@ const useTicketStore = create<TicketState>((set, get) => ({
     try {
       const response = await TicketService.createTicket(payload, images);
       toast.success(response.message || "Tạo ticket thành công");
-      return response.data;
+      // response.data = { ticket, attachments } — unwrap the ticket object
+      return response.data?.ticket ?? null;
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const msg =

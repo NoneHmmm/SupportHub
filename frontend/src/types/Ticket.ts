@@ -54,6 +54,11 @@ export interface TicketDetail {
   attachments: Attachment[];
 }
 
+export interface CreateTicketResponse {
+  ticket: Ticket;
+  attachments: Attachment[];
+}
+
 export interface CreateTicketPayload {
   title: string;
   description: string;

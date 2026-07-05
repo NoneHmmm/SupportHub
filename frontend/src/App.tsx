@@ -16,8 +16,19 @@ import ProtectedRoute from "./components/common/ProtectedRoute";
 import { Toaster } from "sonner";
 import { socket } from "./socket/socket";
 import { useEffect } from "react";
+import useAuthStore from "./stores/useAuthStore";
 
 const App = () => {
+  const getUser = useAuthStore((s) => s.getUser);
+
+  // Restore session on app mount
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      getUser();
+    }
+  }, [getUser]);
+
   useEffect(() => {
     socket.connect();
     socket.on("connect", () => {

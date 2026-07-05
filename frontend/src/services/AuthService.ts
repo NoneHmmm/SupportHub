@@ -23,6 +23,11 @@ export const logoutUser = async () => {
   return response.data;
 };
 
+export const refreshAccessToken = async () => {
+  const response = await api.post("/auth/refresh-token");
+  return response.data;
+};
+
 export const forgotPassword = async (email: string) => {
   const response = await api.post("/auth/forgot-password", { email });
   return response.data;

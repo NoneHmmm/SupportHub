@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Outlet } from "react-router";
+import { useTranslation } from "react-i18next";
 import SupportSidebar from "../components/common/SupportSidebar";
 import SupportNavbar from "../components/common/SupportNavbar";
 
@@ -53,20 +54,21 @@ const IconPlus = ({ className }: { className?: string }) => (
 
 const SupportLayout = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const { t } = useTranslation();
 
   const navItems = [
     {
-      label: "Portal",
+      label: t("nav.portal"),
       path: "/support/portal",
       icon: IconPortal,
     },
     {
-      label: "My Tickets",
+      label: t("nav.my_tickets"),
       path: "/support/my-tickets",
       icon: IconTicket,
     },
     {
-      label: "New Ticket",
+      label: t("nav.new_ticket"),
       path: "/support/create-ticket",
       icon: IconPlus,
     },

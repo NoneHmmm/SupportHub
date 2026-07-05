@@ -1,24 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { useTranslation } from "react-i18next";
 import useTicketStore from "../../stores/useTicketStore";
 import { Button, Input, Textarea, Select } from "../../components/ui";
 import type { TicketType, TicketPriority } from "../../types/Ticket";
 
-const typeOptions: { value: string; label: string }[] = [
-  { value: "bug", label: "Bug" },
-  { value: "feature", label: "Feature" },
-  { value: "task", label: "Task" },
-  { value: "other", label: "Khác" },
-];
-
-const priorityOptions: { value: string; label: string }[] = [
-  { value: "low", label: "Thấp" },
-  { value: "medium", label: "Trung bình" },
-  { value: "high", label: "Cao" },
-];
-
 const CreateTicketPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { createTicket, loading } = useTicketStore();
 
   const [title, setTitle] = useState("");
@@ -34,8 +23,8 @@ const CreateTicketPage = () => {
 
   const validate = () => {
     const next: typeof errors = {};
-    if (!title.trim()) next.title = "Vui lòng nhập tiêu đề";
-    if (!description.trim()) next.description = "Vui lòng nhập mô tả";
+    if (!title.trim()) next.title = t("auth.error_required");
+    if (!description.trim()) next.description = t("auth.error_required");
     setErrors(next);
     return Object.keys(next).length === 0;
   };
@@ -65,6 +54,19 @@ const CreateTicketPage = () => {
     }
   };
 
+  const typeOptions: { value: string; label: string }[] = [
+    { value: "bug", label: t("ticket.filter_type_bug") },
+    { value: "feature", label: t("ticket.filter_type_feature") },
+    { value: "task", label: t("ticket.filter_type_task") },
+    { value: "other", label: t("ticket.filter_type_other") },
+  ];
+
+  const priorityOptions: { value: string; label: string }[] = [
+    { value: "low", label: t("ticket.filter_priority_low") },
+    { value: "medium", label: t("ticket.filter_priority_medium") },
+    { value: "high", label: t("ticket.filter_priority_high") },
+  ];
+
   return (
     <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 lg:px-8">
       {/* Back button */}
@@ -85,17 +87,16 @@ const CreateTicketPage = () => {
           <path d="M19 12H5" />
           <polyline points="12 19 5 12 12 5" />
         </svg>
-        Quay lại
+        {t("ticket.back")}
       </button>
 
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-2xl font-bold tracking-tight text-notion-text">
-          Tạo ticket mới
+          {t("ticket.title_create")}
         </h1>
         <p className="mt-1.5 text-sm text-notion-text-secondary">
-          Mô tả vấn đề bạn đang gặp phải. Đội ngũ hỗ trợ sẽ phản hồi trong thời
-          gian sớm nhất.
+          {t("ticket.subtitle_create")}
         </p>
       </div>
 
@@ -104,9 +105,9 @@ const CreateTicketPage = () => {
         <div className="rounded-lg border border-notion-border bg-notion-bg p-6 shadow-notion-sm space-y-5">
           {/* Title */}
           <Input
-            label="Tiêu đề"
+            label={t("ticket.form_title_label")}
             name="title"
-            placeholder="Ví dụ: Không thể đăng nhập vào tài khoản"
+            placeholder={t("ticket.form_title_placeholder")}
             value={title}
             onChange={(e) => {
               setTitle(e.target.value);
@@ -119,9 +120,9 @@ const CreateTicketPage = () => {
 
           {/* Description */}
           <Textarea
-            label="Mô tả chi tiết"
+            label={t("ticket.form_description_label")}
             name="description"
-            placeholder="Mô tả vấn đề bạn đang gặp phải càng chi tiết càng tốt..."
+            placeholder={t("ticket.form_description_placeholder")}
             value={description}
             onChange={(e) => {
               setDescription(e.target.value);
@@ -136,11 +137,11 @@ const CreateTicketPage = () => {
           {/* Type & Priority row */}
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <Select
-              label="Loại ticket"
+              label={t("ticket.form_type_label")}
               name="type"
               value={type}
               onChange={(e) => setType(e.target.value)}
-              placeholder="Chọn loại ticket"
+              placeholder={t("ticket.form_type_placeholder")}
             >
               {typeOptions.map((opt) => (
                 <option key={opt.value} value={opt.value}>
@@ -150,11 +151,11 @@ const CreateTicketPage = () => {
             </Select>
 
             <Select
-              label="Mức độ ưu tiên"
+              label={t("ticket.form_priority_label")}
               name="priority"
               value={priority}
               onChange={(e) => setPriority(e.target.value)}
-              placeholder="Chọn mức độ ưu tiên"
+              placeholder={t("ticket.form_priority_placeholder")}
             >
               {priorityOptions.map((opt) => (
                 <option key={opt.value} value={opt.value}>
@@ -166,19 +167,19 @@ const CreateTicketPage = () => {
 
           {/* Tags */}
           <Input
-            label="Tags (phân cách bằng dấu phẩy)"
+            label={t("ticket.form_tags_label")}
             name="tags"
-            placeholder="Ví dụ: urgent, login, bug"
+            placeholder={t("ticket.form_tags_placeholder")}
             value={tagsInput}
             onChange={(e) => setTagsInput(e.target.value)}
-            hint="Tags giúp phân loại và tìm kiếm ticket dễ dàng hơn"
+            hint={t("ticket.form_tags_hint")}
             wrapperClassName="w-full"
           />
 
           {/* File upload */}
           <div className="flex flex-col gap-1">
             <label className="text-sm font-medium text-notion-text">
-              Tệp đính kèm (tuỳ chọn)
+              {t("ticket.form_attachments_label")}
             </label>
             <div className="flex items-center gap-3">
               <label className="inline-flex cursor-pointer items-center gap-2 rounded-md border border-notion-border bg-notion-surface px-4 py-2 text-sm text-notion-text-secondary hover:bg-notion-surface-hover transition-colors">
@@ -195,7 +196,7 @@ const CreateTicketPage = () => {
                   <polyline points="17 8 12 3 7 8" />
                   <line x1="12" y1="3" x2="12" y2="15" />
                 </svg>
-                Chọn tệp
+                {t("ticket.form_attachments_button")}
                 <input
                   type="file"
                   multiple
@@ -209,7 +210,7 @@ const CreateTicketPage = () => {
               </label>
               {files.length > 0 && (
                 <span className="text-sm text-notion-text-secondary">
-                  {files.length} tệp đã chọn
+                  {t("ticket.form_attachments_files_selected", { count: files.length })}
                 </span>
               )}
             </div>
@@ -255,7 +256,7 @@ const CreateTicketPage = () => {
             type="button"
             onClick={() => navigate(-1)}
           >
-            Huỷ
+            {t("ticket.form_cancel")}
           </Button>
           <Button
             variant="primary"
@@ -264,7 +265,7 @@ const CreateTicketPage = () => {
             loading={loading}
             disabled={loading}
           >
-            Gửi ticket
+            {t("ticket.form_submit")}
           </Button>
         </div>
       </form>

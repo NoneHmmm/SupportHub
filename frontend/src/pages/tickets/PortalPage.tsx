@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
+import { useTranslation } from "react-i18next";
 import useTicketStore from "../../stores/useTicketStore";
 import useAuthStore from "../../stores/useAuthStore";
 import { Button } from "../../components/ui";
@@ -67,6 +68,7 @@ const IconCheckCircle = ({ className }: { className?: string }) => (
 
 const PortalPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { user } = useAuthStore();
   const { myTickets, loading, getMyTickets } = useTicketStore();
 
@@ -84,11 +86,12 @@ const PortalPage = () => {
       {/* Welcome header */}
       <div className="mb-8">
         <h1 className="text-2xl font-bold tracking-tight text-notion-text">
-          Chào mừng, {user?.fullName || "bạn"}!
+          {t("ticket.subtitle_portal_welcome", {
+            name: user?.fullName || t("common.brand"),
+          })}
         </h1>
         <p className="mt-1 text-sm text-notion-text-secondary">
-          Đây là cổng hỗ trợ khách hàng. Hãy tạo ticket mới hoặc theo dõi các
-          ticket hiện tại.
+          {t("ticket.subtitle_portal")}
         </p>
       </div>
 
@@ -104,7 +107,7 @@ const PortalPage = () => {
                 {myTickets.length}
               </p>
               <p className="text-xs text-notion-text-secondary">
-                Tổng số ticket
+                {t("ticket.stat_total")}
               </p>
             </div>
           </div>
@@ -119,7 +122,9 @@ const PortalPage = () => {
               <p className="text-2xl font-bold text-notion-text">
                 {pendingTickets.length}
               </p>
-              <p className="text-xs text-notion-text-secondary">Đang xử lý</p>
+              <p className="text-xs text-notion-text-secondary">
+                {t("ticket.stat_pending")}
+              </p>
             </div>
           </div>
         </div>
@@ -134,7 +139,7 @@ const PortalPage = () => {
                 {resolvedTickets.length}
               </p>
               <p className="text-xs text-notion-text-secondary">
-                Đã giải quyết
+                {t("ticket.stat_resolved")}
               </p>
             </div>
           </div>
@@ -147,14 +152,14 @@ const PortalPage = () => {
         <div className="lg:col-span-2">
           <div className="mb-4 flex items-center justify-between">
             <h2 className="text-lg font-semibold text-notion-text">
-              Ticket gần đây
+              {t("ticket.title_my_tickets")}
             </h2>
             <Button
               variant="ghost"
               size="sm"
               onClick={() => navigate("/support/my-tickets")}
             >
-              Xem tất cả
+              {t("ticket.view_all")}
             </Button>
           </div>
 
@@ -175,10 +180,10 @@ const PortalPage = () => {
             <div className="rounded-lg border border-notion-border bg-notion-bg p-8 text-center shadow-notion-sm">
               <IconTicket className="mx-auto mb-3 size-10 text-notion-text-tertiary" />
               <h3 className="mb-1 text-sm font-semibold text-notion-text">
-                Chưa có ticket nào
+                {t("ticket.empty_title")}
               </h3>
               <p className="mb-4 text-sm text-notion-text-secondary">
-                Tạo ticket đầu tiên để bắt đầu nhận hỗ trợ.
+                {t("ticket.empty_subtitle")}
               </p>
               <Button
                 variant="primary"
@@ -186,7 +191,7 @@ const PortalPage = () => {
                 icon={IconPlus as never}
                 onClick={() => navigate("/support/create-ticket")}
               >
-                Tạo ticket mới
+                {t("ticket.create_new")}
               </Button>
             </div>
           ) : (
@@ -203,11 +208,10 @@ const PortalPage = () => {
           {/* Create ticket CTA */}
           <div className="rounded-lg border border-notion-border bg-notion-bg p-6 shadow-notion-sm">
             <h3 className="mb-2 text-sm font-semibold text-notion-text">
-              Cần hỗ trợ?
+              {t("ticket.need_help_title")}
             </h3>
             <p className="mb-4 text-sm text-notion-text-secondary leading-relaxed">
-              Tạo ticket mới và đội ngũ hỗ trợ sẽ phản hồi bạn trong thời gian
-              sớm nhất.
+              {t("ticket.need_help_desc")}
             </p>
             <Button
               variant="primary"
@@ -216,51 +220,31 @@ const PortalPage = () => {
               className="w-full justify-center"
               onClick={() => navigate("/support/create-ticket")}
             >
-              Tạo ticket
+              {t("ticket.need_help_action")}
             </Button>
           </div>
 
           {/* Status guide */}
           <div className="rounded-lg border border-notion-border bg-notion-bg p-6 shadow-notion-sm">
             <h3 className="mb-3 text-sm font-semibold text-notion-text">
-              Trạng thái ticket
+              {t("ticket.status_guide_title")}
             </h3>
             <ul className="space-y-3 text-sm text-notion-text-secondary">
               <li className="flex items-center gap-2">
                 <span className="size-2 rounded-full bg-notion-yellow-text shrink-0" />
-                <span>
-                  <strong className="font-medium text-notion-text">
-                    Chờ xử lý
-                  </strong>{" "}
-                  — Ticket đang chờ được phân công
-                </span>
+                <span>{t("ticket.status_guide_pending")}</span>
               </li>
               <li className="flex items-center gap-2">
                 <span className="size-2 rounded-full bg-notion-blue-text shrink-0" />
-                <span>
-                  <strong className="font-medium text-notion-text">
-                    Đang xử lý
-                  </strong>{" "}
-                  — Ticket đang được nhân viên xử lý
-                </span>
+                <span>{t("ticket.status_guide_in_progress")}</span>
               </li>
               <li className="flex items-center gap-2">
                 <span className="size-2 rounded-full bg-notion-green-text shrink-0" />
-                <span>
-                  <strong className="font-medium text-notion-text">
-                    Đã giải quyết
-                  </strong>{" "}
-                  — Vấn đề đã được xử lý
-                </span>
+                <span>{t("ticket.status_guide_resolved")}</span>
               </li>
               <li className="flex items-center gap-2">
                 <span className="size-2 rounded-full bg-notion-gray-text shrink-0" />
-                <span>
-                  <strong className="font-medium text-notion-text">
-                    Đã đóng
-                  </strong>{" "}
-                  — Ticket đã kết thúc
-                </span>
+                <span>{t("ticket.status_guide_closed")}</span>
               </li>
             </ul>
           </div>

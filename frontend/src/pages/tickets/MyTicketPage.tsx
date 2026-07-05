@@ -1,61 +1,62 @@
 import { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router";
+import { useTranslation } from "react-i18next";
 import useTicketStore from "../../stores/useTicketStore";
-import { Button } from "../../components/ui";
+import { Button, Select } from "../../components/ui";
 import { TicketCard } from "../../components/tickets/TicketCard";
-import type { TicketStatus, TicketPriority, TicketType } from "../../types/Ticket";
+import type {
+  TicketStatus,
+  TicketPriority,
+  TicketType,
+} from "../../types/Ticket";
 
 const IconPlus = ({ className }: { className?: string }) => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-    <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <line x1="12" y1="5" x2="12" y2="19" />
+    <line x1="5" y1="12" x2="19" y2="12" />
   </svg>
 );
 
 const IconFilter = ({ className }: { className?: string }) => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
     <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
   </svg>
 );
 
 const IconRefresh = ({ className }: { className?: string }) => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
     <polyline points="23 4 23 10 17 10" />
     <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
   </svg>
 );
 
-const statusOptions: { value: string; label: string }[] = [
-  { value: "", label: "Tất cả trạng thái" },
-  { value: "pending", label: "Chờ xử lý" },
-  { value: "in_progress", label: "Đang xử lý" },
-  { value: "resolved", label: "Đã giải quyết" },
-  { value: "closed", label: "Đã đóng" },
-];
-
-const priorityOptions: { value: string; label: string }[] = [
-  { value: "", label: "Tất cả mức độ" },
-  { value: "low", label: "Thấp" },
-  { value: "medium", label: "Trung bình" },
-  { value: "high", label: "Cao" },
-];
-
-const typeOptions: { value: string; label: string }[] = [
-  { value: "", label: "Tất cả loại" },
-  { value: "bug", label: "Bug" },
-  { value: "feature", label: "Feature" },
-  { value: "task", label: "Task" },
-  { value: "other", label: "Khác" },
-];
-
-const sortOptions: { value: string; label: string }[] = [
-  { value: "-createdAt", label: "Mới nhất" },
-  { value: "createdAt", label: "Cũ nhất" },
-  { value: "-priority", label: "Mức độ ưu tiên" },
-  { value: "-updatedAt", label: "Cập nhật gần đây" },
-];
-
 const MyTicketPage = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { myTickets, loading, pagination, getMyTickets } = useTicketStore();
 
   // Filter state
@@ -105,10 +106,10 @@ const MyTicketPage = () => {
       <div className="mb-6 flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-notion-text">
-            Ticket của tôi
+            {t("ticket.title_my_tickets")}
           </h1>
           <p className="mt-1 text-sm text-notion-text-secondary">
-            Quản lý và theo dõi tất cả các ticket bạn đã gửi.
+            {t("ticket.subtitle_my_tickets")}
           </p>
         </div>
         <Button
@@ -117,7 +118,7 @@ const MyTicketPage = () => {
           icon={IconPlus as never}
           onClick={() => navigate("/support/create-ticket")}
         >
-          Tạo ticket
+          {t("ticket.create_new")}
         </Button>
       </div>
 
@@ -142,12 +143,12 @@ const MyTicketPage = () => {
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="Tìm kiếm ticket..."
+              placeholder={t("ticket.search_placeholder")}
               className="block w-full rounded-md border border-notion-border bg-notion-surface py-2 pl-10 pr-3 text-sm text-notion-text placeholder:text-notion-text-tertiary transition-colors focus:border-notion-blue-text focus:outline-none focus:ring-1 focus:ring-notion-blue-text"
             />
           </div>
           <Button variant="secondary" size="md" type="submit">
-            Tìm kiếm
+            {t("ticket.filter_search")}
           </Button>
         </form>
 
@@ -155,48 +156,72 @@ const MyTicketPage = () => {
         <div className="flex flex-wrap items-center gap-3">
           <div className="flex items-center gap-1.5 text-sm text-notion-text-secondary">
             <IconFilter className="size-4" />
-            <span>Lọc:</span>
+            <span>{t("ticket.filter_label")}</span>
           </div>
 
-          <select
+          <Select
             value={status}
-            onChange={(e) => { setStatus(e.target.value); setPage(1); }}
-            className="rounded-md border border-notion-border bg-notion-surface px-3 py-1.5 text-sm text-notion-text transition-colors focus:border-notion-blue-text focus:outline-none focus:ring-1 focus:ring-notion-blue-text"
+            onChange={(e) => {
+              setStatus(e.target.value);
+              setPage(1);
+            }}
+            className="w-40"
+            placeholder={t("ticket.filter_status_all")}
           >
-            {statusOptions.map((opt) => (
-              <option key={opt.value} value={opt.value}>{opt.label}</option>
-            ))}
-          </select>
+            <option value="pending">{t("ticket.filter_status_pending")}</option>
+            <option value="in_progress">
+              {t("ticket.filter_status_in_progress")}
+            </option>
+            <option value="resolved">
+              {t("ticket.filter_status_resolved")}
+            </option>
+            <option value="closed">{t("ticket.filter_status_closed")}</option>
+          </Select>
 
-          <select
+          <Select
             value={priority}
-            onChange={(e) => { setPriority(e.target.value); setPage(1); }}
-            className="rounded-md border border-notion-border bg-notion-surface px-3 py-1.5 text-sm text-notion-text transition-colors focus:border-notion-blue-text focus:outline-none focus:ring-1 focus:ring-notion-blue-text"
+            onChange={(e) => {
+              setPriority(e.target.value);
+              setPage(1);
+            }}
+            className="w-40"
+            placeholder={t("ticket.filter_priority_all")}
           >
-            {priorityOptions.map((opt) => (
-              <option key={opt.value} value={opt.value}>{opt.label}</option>
-            ))}
-          </select>
+            <option value="low">{t("ticket.filter_priority_low")}</option>
+            <option value="medium">{t("ticket.filter_priority_medium")}</option>
+            <option value="high">{t("ticket.filter_priority_high")}</option>
+          </Select>
 
-          <select
+          <Select
             value={type}
-            onChange={(e) => { setType(e.target.value); setPage(1); }}
-            className="rounded-md border border-notion-border bg-notion-surface px-3 py-1.5 text-sm text-notion-text transition-colors focus:border-notion-blue-text focus:outline-none focus:ring-1 focus:ring-notion-blue-text"
+            onChange={(e) => {
+              setType(e.target.value);
+              setPage(1);
+            }}
+            className="w-40"
+            placeholder={t("ticket.filter_type_all")}
           >
-            {typeOptions.map((opt) => (
-              <option key={opt.value} value={opt.value}>{opt.label}</option>
-            ))}
-          </select>
+            <option value="bug">{t("ticket.filter_type_bug")}</option>
+            <option value="feature">{t("ticket.filter_type_feature")}</option>
+            <option value="task">{t("ticket.filter_type_task")}</option>
+            <option value="other">{t("ticket.filter_type_other")}</option>
+          </Select>
 
-          <select
+          <Select
             value={sort}
-            onChange={(e) => { setSort(e.target.value); setPage(1); }}
-            className="rounded-md border border-notion-border bg-notion-surface px-3 py-1.5 text-sm text-notion-text transition-colors focus:border-notion-blue-text focus:outline-none focus:ring-1 focus:ring-notion-blue-text"
+            onChange={(e) => {
+              setSort(e.target.value);
+              setPage(1);
+            }}
+            className="w-44"
           >
-            {sortOptions.map((opt) => (
-              <option key={opt.value} value={opt.value}>{opt.label}</option>
-            ))}
-          </select>
+            <option value="-createdAt">{t("ticket.filter_sort_newest")}</option>
+            <option value="createdAt">{t("ticket.filter_sort_oldest")}</option>
+            <option value="-priority">
+              {t("ticket.filter_sort_priority")}
+            </option>
+            <option value="-updatedAt">{t("ticket.filter_sort_recent")}</option>
+          </Select>
 
           {hasActiveFilters && (
             <button
@@ -205,13 +230,13 @@ const MyTicketPage = () => {
               className="inline-flex items-center gap-1 rounded-md px-3 py-1.5 text-sm text-notion-red-text hover:bg-notion-red-bg transition-colors cursor-pointer"
             >
               <IconRefresh className="size-3.5" />
-              Xoá lọc
+              {t("ticket.filter_reset")}
             </button>
           )}
 
           {pagination && (
             <span className="ml-auto text-xs text-notion-text-tertiary">
-              {pagination.total} ticket
+              {t("ticket.pagination_total", { count: pagination.total })}
             </span>
           )}
         </div>
@@ -249,12 +274,14 @@ const MyTicketPage = () => {
             <path d="M7 11V7a5 5 0 0 1 10 0v4" />
           </svg>
           <h3 className="mb-1 text-lg font-semibold text-notion-text">
-            {hasActiveFilters ? "Không tìm thấy ticket" : "Chưa có ticket nào"}
+            {hasActiveFilters
+              ? t("ticket.empty_filter_title")
+              : t("ticket.empty_title")}
           </h3>
           <p className="mb-6 text-sm text-notion-text-secondary">
             {hasActiveFilters
-              ? "Thử thay đổi bộ lọc hoặc từ khóa tìm kiếm."
-              : "Tạo ticket đầu tiên để bắt đầu nhận hỗ trợ."}
+              ? t("ticket.empty_filter_subtitle")
+              : t("ticket.empty_subtitle")}
           </p>
           {!hasActiveFilters && (
             <Button
@@ -263,7 +290,7 @@ const MyTicketPage = () => {
               icon={IconPlus as never}
               onClick={() => navigate("/support/create-ticket")}
             >
-              Tạo ticket mới
+              {t("ticket.create_new")}
             </Button>
           )}
         </div>
@@ -284,7 +311,7 @@ const MyTicketPage = () => {
             disabled={page <= 1}
             onClick={() => setPage((p) => Math.max(1, p - 1))}
           >
-            Trước
+            {t("ticket.prev_page")}
           </Button>
 
           {Array.from({ length: pagination.totalPages }, (_, i) => i + 1).map(
@@ -310,7 +337,7 @@ const MyTicketPage = () => {
             disabled={page >= pagination.totalPages}
             onClick={() => setPage((p) => p + 1)}
           >
-            Sau
+            {t("ticket.next_page")}
           </Button>
         </div>
       )}

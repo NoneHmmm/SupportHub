@@ -24,18 +24,21 @@ interface AuthState {
 
 const useAuthStore = create<AuthState>((set) => ({
   user: null,
-  isAuthenticated: false,
-  token: null,
+  isAuthenticated: !!localStorage.getItem("token"),
+  token: localStorage.getItem("token") || null,
   refreshToken: null,
   isLoading: false,
   error: null,
+
   login: async (email: string, password: string) => {
     set({ isLoading: true });
     try {
       const response = await AuthService.loginUser(email, password);
+      const { token, user } = response.data;
+      localStorage.setItem("token", token);
       set({
-        user: response.data.user,
-        token: response.data.token,
+        user,
+        token,
         isAuthenticated: true,
       });
       toast.success("Đăng nhập thành công");
@@ -50,8 +53,13 @@ const useAuthStore = create<AuthState>((set) => ({
       set({ isLoading: false });
     }
   },
-  logout: () => {
-    AuthService.logoutUser();
+  logout: async () => {
+    try {
+      await AuthService.logoutUser();
+    } catch {
+      // Silently ignore logout API errors
+    }
+    localStorage.removeItem("token");
     set({ user: null, isAuthenticated: false, token: null, isLoading: false });
   },
   register: async (fullName: string, email: string, password: string) => {

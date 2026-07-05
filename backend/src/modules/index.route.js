@@ -8,7 +8,7 @@ const router = Router();
 
 router.use("/auth", authRoutes);
 router.use("/user", userRoutes);
-router.use("/ticket", ticketRoutes);
+router.use("/tickets", ticketRoutes);
 router.use("/dashboard", dashboardRoutes);
 
 export default router;

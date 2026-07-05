@@ -14,7 +14,6 @@ const ticketMessageSchema = new mongoose.Schema({
     recipientId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: true,
     },
     message: {
         type: String,

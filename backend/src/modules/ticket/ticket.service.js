@@ -61,7 +61,11 @@ export const createTicket = async (userId, ticketData, uploadedImages = []) => {
     }));
     attachments = await Attachment.insertMany(attachmentDocs);
   }
-
+  await TicketMessage.create({
+    ticketId: ticket._id,
+    senderId: userId,
+    message: description,
+  });
   return { ticket, attachments };
 };
 

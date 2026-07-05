@@ -150,7 +150,7 @@ const SupportSidebar = ({ collapsed, onToggle, items }: SupportSidebarProps) => 
             "w-full",
             collapsed ? "justify-center px-0" : "justify-start",
           )}
-          onClick={() => navigate("/support/my-tickets")}
+          onClick={() => navigate("/support/create-ticket")}
         >
           {!collapsed && "New Ticket"}
         </Button>
